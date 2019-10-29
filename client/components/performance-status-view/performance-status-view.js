@@ -13,28 +13,53 @@ import {
 } from "./charts-data";
 import { Line, Doughnut } from "react-chartjs-2";
 import FontAwesome from 'react-fontawesome'
-
+//import { connectSocket } from './socketio';
 import './performance-status-view.scss'
-
+import openSocket from 'socket.io-client';
 export default class PerformanceStatusView extends React.Component {
 
     constructor(props) {
         super(props);
-
+        this.state = {
+          response: 10,
+        };
         this.onDeleteClicked = this.onDeleteClicked.bind(this)
+        //connectSocket((response) => this.setState({value:response
+  //}));
+      //  this.updateResponse = this.updateResponse.bind(this)
     }
+componentDidMount() {
+  const socket = openSocket('http://localhost:3001');
+  socket.emit('trigger event', {start:'hello'} );
 
+  //socket.on('news', response => cb(response));
+  socket.on('news', function (data) {
+   console.log(data);
+   data => this.setState({ response: data })
+ })
+
+}
+
+
+//  updateResponse(data){
+      // no underscore dongle
+
+      // set new state only inside.
+      // do whatever you want to do over here.
+    // this.setState({response:data});}
     onDeleteClicked() {
         this.props.onDeleteData(this.props.data)
     }
 
     render() {
+        const { response } = this.state;
         const gaugeData = {
             labels: [
-                'Red'
+                'Red',
+                'blue'
             ],
             datasets: [{
-                data: [300],
+                data: [300, response],//realtime data
                 backgroundColor: [
                 '#FF6384',
                 '#36A2EB',

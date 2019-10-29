@@ -19,6 +19,14 @@ import httpClient from '../../httpClient'
 import request from 'request'
 import Swal from 'sweetalert2'
 
+
+
+/*
+function subscribeToServer(cb) {
+  socket.on('timer', timestamp => cb(null, timestamp));
+  socket.emit('subscribeToServer', 1000);
+  console.log('emit subscribeToServer')
+}*/
 class PerformanceStatus extends Component {
   constructor(props) {
     super(props)
@@ -32,7 +40,10 @@ class PerformanceStatus extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleModalDataChange = this.handleModalDataChange.bind(this)
     this.onDeleteData = this.onDeleteData.bind(this)
+
+
   }
+
 
   componentDidMount() {
     httpClient.getAllData().then(performanceStatus => {
@@ -40,7 +51,14 @@ class PerformanceStatus extends Component {
         this.setState({ chartData: performanceStatus.data })
       }
     })
+
+
+
+  //  console.log('emit subscribeToServer:', this.getData)
   }
+
+
+
   toggleModal(evt, modalData) {
     const isModalOpen = !this.state.isModalOpen
 
@@ -79,7 +97,6 @@ class PerformanceStatus extends Component {
       if (res && res.success) {
         const chartData = this.state.chartData
         chartData.push(res.data)
-
         console.log(chartData)
         this.setState({ chartData })
         this.toggleModal()
@@ -129,6 +146,7 @@ class PerformanceStatus extends Component {
       <div className='performance-status content'>
         <div className='header-content'>
           <h2 className="header-content-text">Performance Status</h2>
+
           <Button color="primary" className="header-content-button" onClick={e => this.toggleModal(e)}>Add Graph</Button>
         </div>
 
