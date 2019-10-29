@@ -42,9 +42,6 @@ export default class NavBar extends React.Component {
               <NavLink tag={Link} to="/performance-status" onClick={this.toggle}>PERFORMANCE-STATUS</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to="/performance-status" onClick={this.toggle}>NETWORK INSIGHTS</NavLink>
-            </NavItem>
-            <NavItem>
               <NavLink tag={Link} to="/performance-status" onClick={this.toggle}>ALARMS AND FAULTS</NavLink>
             </NavItem>
             <NavItem>
@@ -55,9 +52,6 @@ export default class NavBar extends React.Component {
             </NavItem>
             <NavItem>
               <NavLink target="_blank" href="http://10.181.39.1" onClick={this.toggle}>BP-ANALYTICS</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink target="_blank" href="http://10.181.39.7" onClick={this.toggle}>BP-MCP</NavLink>
             </NavItem>
           </Nav>
         </Collapse>

@@ -18,7 +18,7 @@ import { NES, GRAPH_TYPES } from '../../constants/performance-status'
 import httpClient from '../../httpClient'
 import request from 'request'
 import Swal from 'sweetalert2'
-
+import Plot from 'react-plotly.js';
 
 
 /*
@@ -147,7 +147,8 @@ class PerformanceStatus extends Component {
         <div className='header-content'>
           <h2 className="header-content-text">Performance Status</h2>
 
-          <Button color="primary" className="header-content-button" onClick={e => this.toggleModal(e)}>Add Graph</Button>
+          <Button color="primary" className="header-content-button" onClick={e => this.toggleModal(e)}>Add Gddddraph</Button>
+
         </div>
 
         <Row>
@@ -175,6 +176,7 @@ class PerformanceStatus extends Component {
           </ModalFooter>
         </Modal>
       </div>
+
     );
   }
 }

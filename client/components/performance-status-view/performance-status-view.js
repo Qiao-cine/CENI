@@ -8,6 +8,9 @@ import {
 
 } from 'reactstrap';
 
+//import React from 'react';
+
+
 import {
     chartExample2,
 } from "./charts-data";
@@ -106,7 +109,9 @@ componentDidMount() {
                         </div>
                     </CardBody>
                 </Card>
+
             </div>
+
         )
     }
 }
