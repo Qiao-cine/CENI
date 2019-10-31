@@ -7,7 +7,7 @@ const helmet = require('helmet')
 const path = require('path')
 const serveStatic = require('serve-static')
 const performanceStatusRoutes = require('./routes/performance-status')
-const networkInsightRoutes = require('./routes/network-insights')
+
 
 dotenv.config()
 
@@ -47,7 +47,7 @@ app.get('/api', (req, res) => {
 })
 
 app.use('/api/performance-status', performanceStatusRoutes)
-// app.use('/api/network-insights', networkInsightRoutes)
+
 
 const appDir = path.join(`${__dirname}/../dist/index.html`)
 app.use(serveStatic('./dist', { index: ['default.html', 'default.htm'] }))

@@ -18,7 +18,7 @@ import { NES, GRAPH_TYPES } from '../../constants/performance-status'
 import httpClient from '../../httpClient'
 import request from 'request'
 import Swal from 'sweetalert2'
-import Plot from 'react-plotly.js';
+//import Plot from 'react-plotly.js';
 
 
 /*

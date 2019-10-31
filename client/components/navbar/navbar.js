@@ -42,6 +42,9 @@ export default class NavBar extends React.Component {
               <NavLink tag={Link} to="/performance-status" onClick={this.toggle}>PERFORMANCE-STATUS</NavLink>
             </NavItem>
             <NavItem>
+              <NavLink tag={Link} to="/network-insights" onClick={this.toggle}>NETWORK INSIGHTS</NavLink>
+            </NavItem>
+            <NavItem>
               <NavLink tag={Link} to="/performance-status" onClick={this.toggle}>ALARMS AND FAULTS</NavLink>
             </NavItem>
             <NavItem>
