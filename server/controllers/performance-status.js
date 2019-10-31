@@ -52,7 +52,7 @@ sio.on('connection', socket => {
         socket.on('trigger event', function (data) {
           console.log(data);
           setInterval(function(){
-              socket.emit('news', {kafkaMessage});
+              socket.emit('news', kafkaMessage);
           }, 1000);
         //  socket.emit('news', {kafkaMessage});
         });

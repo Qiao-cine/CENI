@@ -32,14 +32,13 @@ export default class PerformanceStatusView extends React.Component {
       //  this.updateResponse = this.updateResponse.bind(this)
     }
 componentDidMount() {
-  const socket = openSocket('http://localhost:3001');
-  socket.emit('trigger event', {start:'hello'} );
-
-  //socket.on('news', response => cb(response));
-  socket.on('news', function (data) {
-   console.log(data);
-   data => this.setState({ response: data })
- })
+ //  const socket = openSocket('http://localhost:3001');
+ //  socket.emit('trigger event', {start:'hello'} );
+ //
+ //  socket.on('news', function (data) {
+ //   console.log(data);
+ //   data => this.setState({ response: data })
+ // })
 
 }
 

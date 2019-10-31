@@ -147,7 +147,7 @@ class PerformanceStatus extends Component {
         <div className='header-content'>
           <h2 className="header-content-text">Performance Status</h2>
 
-          <Button color="primary" className="header-content-button" onClick={e => this.toggleModal(e)}>Add Gddddraph</Button>
+          <Button color="primary" className="header-content-button" onClick={e => this.toggleModal(e)}>Add Graph</Button>
 
         </div>
 
