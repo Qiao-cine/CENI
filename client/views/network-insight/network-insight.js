@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Plotly from ‘plotly.js-basic-dist’;
+import Plotly from 'plotly.js-basic-dist';
 import createPlotlyComponent from 'react-plotly.js/factory';
 const Plot = createPlotlyComponent(Plotly);
 
@@ -17,7 +17,7 @@ class networkInsight extends Component {
 
   render() {
       return (
-       <div>hello</div>
+       <div>
       <Plot
         data={[
           {
@@ -31,6 +31,7 @@ class networkInsight extends Component {
         ]}
         layout={{width: 320, height: 240, title: 'A Fancy Plot'}}
       />
+      </div>
 
       );
     }
