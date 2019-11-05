@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './views/home/home';
 import performanceStatus from './views/performance-status/performance-status';
+import performanceStatusNew from './views/performance-status-new/performance-status-new';
 import networkInsight from './views/network-insight/network-insight';
 import NavBar from './components/navbar/navbar';
 import './app.scss'
@@ -15,8 +16,10 @@ class App extends Component {
           <NavBar />
           <Switch>
             <Route exact path='/' component={Home} />
-            <Route path='/performance-status' component={performanceStatus} />
+            // <Route path='/performance-status' component={performanceStatus} />
             <Route path='/network-insight' component={networkInsight} />
+            <Route path='/performance-status-new' component={performanceStatusNew} />
+
           </Switch>
         </div>
       </Router>

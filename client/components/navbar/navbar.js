@@ -39,13 +39,13 @@ export default class NavBar extends React.Component {
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink tag={Link} to="/performance-status" onClick={this.toggle}>PERFORMANCE-STATUS</NavLink>
+              <NavLink tag={Link} to="/performance-status-new" onClick={this.toggle}>PERFORMANCE-STATUS</NavLink>
             </NavItem>
             <NavItem>
               <NavLink tag={Link} to="/network-insight" onClick={this.toggle}>NETWORK INSIGHTS</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to="/performance-status" onClick={this.toggle}>ALARMS AND FAULTS</NavLink>
+              <NavLink tag={Link} to="/performance-status-new" onClick={this.toggle}>New PERFORMANCE STATUS</NavLink>
             </NavItem>
             <NavItem>
               <NavLink tag={Link} to="/performance-status" onClick={this.toggle}>ML MODELS</NavLink>
