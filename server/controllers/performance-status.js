@@ -6,13 +6,15 @@ const kafkaService = require('./kafkaService')
 var http = require('http');
 const sio = require('socket.io')();
 var HashMap = require('hashmap');
+var clientSocket
 
-
+//create a new socket here
 
 const kafka = require('kafka-node');
 
 var kafkaMessageMap= new HashMap();
 var id_key_map= new HashMap();
+var newmap= new HashMap();
 
 const Client = kafka.KafkaClient;
 const client = new Client({
@@ -32,6 +34,10 @@ consumer_ottawa = new Consumer(
        }
      );
 
+sio.on('connection', socket => {
+  clientSocket = socket
+  console.log('#######'+clientSocket)
+})
 
 consumer_ottawa.connect();
 consumer_ottawa.on('message', async function(message) {
@@ -46,6 +52,10 @@ consumer_ottawa.on('message', async function(message) {
   console.log(kafka_model.value)
   kafkaMessageMap.set(key , kafka_model.value);
   console.log(kafkaMessageMap.get(key))
+//emit
+if(clientSocket){
+ //console.log('#######'+clientSocket)
+ clientSocket.emit(String(key), kafka_model.value);}
 
  })
 
@@ -76,31 +86,31 @@ kafkaService.convertMessage(kafkaMessage_hanover,hanover)
 consumer_hanover.on('error', function (err) {
 console.log('Error:',err);
 })
-/*
-var index=0
-sio.on('connection', socket => {
-    console.log("New client connected");
-    //Here we listen on a new namespace called "incoming data"
-    //socket.on("incoming data", function(){
-        //Here we broadcast it out to all other sockets EXCLUDING the socket which sent us the data
-        socket.emit(String(index), { kafkaMessage});
-        socket.on('trigger event', function (data) {
-          console.log(data);
-          setInterval(function(){
-              socket.emit(String(index), kafkaMessage);
-              socket.emit(String(index+1), kafkaMessage+10);
+// /
+// var index=0
+// sio.on('connection', socket => {
+//     console.log("New client connected");
+//     //Here we listen on a new namespace called "incoming data"
+//     //socket.on("incoming data", function(){
+//         //Here we broadcast it out to all other sockets EXCLUDING the socket which sent us the data
+//         socket.emit(String(index), { kafkaMessage});
+//         socket.on('trigger event', function (data) {
+//           console.log(data);
+//           setInterval(function(){
+//               socket.emit(String(index), kafkaMessage);
+//               socket.emit(String(index+1), kafkaMessage+10);
+//
+//
+//           }, 1000);
+//         //  socket.emit('news', {kafkaMessage});
+//         });
+//
+//
+//     //A special namespace "disconnect" for when a client disconnects
+//     socket.on("disconnect", () => console.log("Client disconnected"));
+// });
 
 
-          }, 1000);
-        //  socket.emit('news', {kafkaMessage});
-        });
-
-
-    //A special namespace "disconnect" for when a client disconnects
-    socket.on("disconnect", () => console.log("Client disconnected"));
-});
-
-*/
 
 
 var port = 3001;
@@ -146,32 +156,35 @@ exports.addData = function (req, res) {
     //@Q
 
     if (data.type=='Real-Time'){
-        console.log("before connection");
-      sio.on('connection', socket => {
-          console.log("New client connected");
-          //Here we listen on a new namespace called "incoming data"
-          //socket.on("incoming data", function(){
-              //Here we broadcast it out to all other sockets EXCLUDING the socket which sent us the data
-            //  console.log(data._id);
+        newmap.set(data_key, data._id)
 
-              
-              socket.emit(String(data_id), kafkaMessageMap.get(data_key));
-              socket.on('trigger event', function (data) {
-                setInterval(function(){
-                    socket.emit(String(data_id), kafkaMessageMap.get(data_key));
-                    // console.log("key:")
-                    // console.log(data_id)
-                    // console.log("value:")
-                    // console.log(kafkaMessageMap.get(data_key))
-                  //  socket.emit(String(index+1), kafkaMessage+10);
-                }, 1000);
-              //  socket.emit('news', {kafkaMessage});
-              });
-
-
-          //A special namespace "disconnect" for when a client disconnects
-          socket.on("disconnect", () => console.log("Client disconnected"));
-      });
+        //console.log("before connection");
+      // sio.on('connection', socket => {
+      //     console.log("New client connected");
+      //     //Here we listen on a new namespace called "incoming data"
+      //     //socket.on("incoming data", function(){
+      //         //Here we broadcast it out to all other sockets EXCLUDING the socket which sent us the data
+      //       //  console.log(data._id);
+      //
+      //
+      //        socket.emit(String(data_id), kafkaMessageMap.get(data_key));
+      //         socket.on('trigger event', function (data) {
+      //           setInterval(function(){
+      //             console.log(data_id)
+      //               socket.emit(String(data_id), kafkaMessageMap.get(data_key));
+      //               // console.log("key:")
+      //               // console.log(data_id)
+      //               // console.log("value:")
+      //               // console.log(kafkaMessageMap.get(data_key))
+      //             //  socket.emit(String(index+1), kafkaMessage+10);
+      //           }, 1000);
+      //         //  socket.emit('news', {kafkaMessage});
+      //         });
+      //
+      //
+      //     //A special namespace "disconnect" for when a client disconnects
+      //     socket.on("disconnect", () => console.log("Client disconnected"));
+      // });
 
 
       //kafkaService.convertMessage(message,data)

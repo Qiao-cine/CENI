@@ -19,6 +19,7 @@ import { NES, GRAPH_TYPES } from '../../constants/performance-status-new'
 import httpClient from '../../httpClient'
 import request from 'request'
 import Swal from 'sweetalert2'
+import openSocket from 'socket.io-client';
 
 //import {connectSocket} from '../../socketio'
 
@@ -37,6 +38,7 @@ class PerformanceStatusNew extends Component {
     super(props)
 
     this.state = {
+      socket: undefined,
       isModalOpen: false,
       chartData: [],
     //  index:0
@@ -52,6 +54,8 @@ class PerformanceStatusNew extends Component {
 
 
   componentDidMount() {
+    const socket = openSocket('http://localhost:3001',{forceNew: true});
+    this.setState({socket})
     //@Q: chartData is Empty
 /*
     httpClient.getAllData().then(PerformanceStatusNew => {
@@ -191,7 +195,7 @@ class PerformanceStatusNew extends Component {
           {this.state.chartData.map((data, key) => {
             return (
               <Col lg="6" key={key} className="chartData">
-                <PerformanceStatusNewView data={data} onDeleteData={this.onDeleteData} />
+                <PerformanceStatusNewView data={data} onDeleteData={this.onDeleteData} socket={this.state.socket} />
               </Col>
             )
           })}

@@ -66,7 +66,9 @@ constructor(props) {
       //  this.updateResponse = this.updateResponse.bind(this)
     }
 componentDidMount() {
-    this.setupWebSocket();
+    if(this.props.socket) {
+    this.setupWebSocket(this.props.socket);
+  }
     setInterval(this.increaseGraphic, 1000);
  //  const socket = openSocket('http://localhost:3001');
  //  socket.emit('trigger event', {start:'hello'} );
@@ -77,12 +79,14 @@ componentDidMount() {
  // })
 
 }
-setupWebSocket = () => {
-  const socket = openSocket('http://localhost:3001',{forceNew: true});
-  socket.emit('trigger event', {start:'hello'} );
+setupWebSocket = (socket) => {
+  console.log(socket)
+  // const socket = openSocket('http://localhost:3001',{forceNew: true});
+//  socket.emit('trigger event', {start:'hello'} );
   console.log('data id:')
   const data = this.props.data
-  console.log(String(data._id));
+  var key=data.location+"_"+data.networkElement+"_"+data.port;
+  console.log(String(key));
   // var socketMessage
   // socketMessage=socketOn(String(data._id),data)
   // this.setState({
@@ -91,7 +95,7 @@ setupWebSocket = () => {
   // console.log('debug1: state response')
   // console.log(this.state.response);
 
-  socket.on(String(data._id),  (data) => {
+  socket.on(String(key),  (data) => {
             this.setState({
                 response:data
             }) ;
